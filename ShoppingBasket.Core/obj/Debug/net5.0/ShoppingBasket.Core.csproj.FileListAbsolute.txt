@@ -1,0 +1,12 @@
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\bin\Debug\net5.0\ShoppingBasket.Core.deps.json
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\bin\Debug\net5.0\ShoppingBasket.Core.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\bin\Debug\net5.0\ref\ShoppingBasket.Core.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\bin\Debug\net5.0\ShoppingBasket.Core.pdb
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.csprojAssemblyReference.cache
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.AssemblyInfoInputs.cache
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.AssemblyInfo.cs
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.csproj.CoreCompileInputs.cache
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ref\ShoppingBasket.Core.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Core\obj\Debug\net5.0\ShoppingBasket.Core.pdb
