@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GhEQ+dfORS8zvqoSSZra9YOKZIMoMAu/+XL7LIOkc/RwxvAg5P5dLR4nOJC4WZJhHZlmCAxEm3FEjlq4/jPJ6w==",
+  "dgSpecHash": "QNW9p24lQGNgBAfbba9g9p05bVIVLSmHTboNLXYaVfPr9lfes7TwJW4cYTnQwJa/GZBnpCWCrzEFWKWxT3dCLw==",
   "success": true,
   "projectFilePath": "C:\\Users\\apavelic\\Documents\\Private\\ShoppingBasket\\ShoppingBasket.Core\\ShoppingBasket.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\apavelic\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\apavelic\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\apavelic\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

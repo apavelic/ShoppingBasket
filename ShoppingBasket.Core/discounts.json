@@ -1,0 +1,44 @@
+[
+	{
+		"Requirements": [
+			{
+				"Type": "Milk",
+				"Quantity": 4
+			}
+		],
+		"Target": "Milk",
+		"DiscountPercentage": 100
+	},
+	{
+		"Requirements": [
+			{
+				"Type": "Milk",
+				"Quantity": 1
+			},
+			{
+				"Type": "Butter",
+				"Quantity": 1
+			},
+			{
+				"Type": "Bread",
+				"Quantity": 1
+			}
+		],
+		"Target": "Butter",
+		"DiscountPercentage": 50
+	},
+	{
+		"Requirements": [
+			{
+				"Type": "Butter",
+				"Quantity": 1
+			},
+			{
+				"Type": "Bread",
+				"Quantity": 1
+			}
+		],
+		"Target": "Butter",
+		"DiscountPercentage": 30
+	}
+]
