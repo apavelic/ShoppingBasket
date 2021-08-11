@@ -1,5 +1,7 @@
 [
 	{
+
+		"Name": "Four Milks Discount",
 		"Requirements": [
 			{
 				"Type": "Milk",
@@ -10,14 +12,11 @@
 		"DiscountPercentage": 100
 	},
 	{
+		"Name": "Butter Bread Discount",
 		"Requirements": [
 			{
-				"Type": "Milk",
-				"Quantity": 1
-			},
-			{
 				"Type": "Butter",
-				"Quantity": 1
+				"Quantity": 2
 			},
 			{
 				"Type": "Bread",
@@ -28,17 +27,18 @@
 		"DiscountPercentage": 50
 	},
 	{
+		"Name": "Milk Bread Discount",
 		"Requirements": [
 			{
-				"Type": "Butter",
-				"Quantity": 1
+				"Type": "Milk",
+				"Quantity": 2
 			},
 			{
 				"Type": "Bread",
 				"Quantity": 1
 			}
 		],
-		"Target": "Butter",
-		"DiscountPercentage": 30
+		"Target": "Bread",
+		"DiscountPercentage": 80
 	}
 ]

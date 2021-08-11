@@ -1,6 +1,5 @@
 ﻿using ShoppingBasket.Core.Enumerations;
 using ShoppingBasket.Core.Models;
-using ShoppingBasket.Models.Core;
 using System.Collections.Generic;
 
 namespace ShoppingBasket.Core.Tests
@@ -9,6 +8,7 @@ namespace ShoppingBasket.Core.Tests
 	{
 		public static Discount ButterBreadDiscount => new Discount
 		{
+			Name = "Butter Bread Discount",
 			Requirements = new List<DiscountItem>
 			{
 				new DiscountItem { Type = ProductType.Butter, Quantity = 2 },
@@ -20,6 +20,7 @@ namespace ShoppingBasket.Core.Tests
 
 		public static Discount MilkBreadDiscount => new Discount
 		{
+			Name = "Milk Bread Discount",
 			Requirements = new List<DiscountItem>
 			{
 				new DiscountItem { Type = ProductType.Milk, Quantity = 2 },
@@ -31,6 +32,7 @@ namespace ShoppingBasket.Core.Tests
 
 		public static Discount FourMilksDiscount => new Discount
 		{
+			Name = "Four Milks Discount",
 			Requirements = new List<DiscountItem>
 			{
 				new DiscountItem { Type = ProductType.Milk, Quantity = 4 },
