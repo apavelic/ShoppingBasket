@@ -15,6 +15,8 @@ namespace ShoppingBasket.Core
 		private IShoppingBasketLogger _logger;
 		private List<Product> _items;
 
+		public List<Product> Items => _items;
+
 		public ShoppingBasket(IDiscountService discountService, IShoppingBasketLogger logger, IEnumerable<Discount> discounts = null)
 		{
 			_discountService = discountService;
@@ -49,7 +51,6 @@ namespace ShoppingBasket.Core
 				_logger.Log($"Error in {nameof(ShoppingBasket)}, Method: {nameof(ShoppingBasket.RemoveItem)}: {e.Message}");
 			}
 		}
-
 
 		public void ApplyDiscount()
 		{
