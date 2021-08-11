@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShoppingBasket.Core.Interfaces;
+using ShoppingBasket.Core.Models;
+using System;
 using System.Collections.Generic;
 
 namespace ShoppingBasket.Api.Controllers
@@ -7,36 +10,36 @@ namespace ShoppingBasket.Api.Controllers
 	[ApiController]
 	public class ShoppingBasketController : ControllerBase
 	{
-		// GET: api/<ValuesController>
-		[HttpGet]
-		public IEnumerable<string> Get()
+		private IShoppingBasket _shoppingBasket;
+
+		public ShoppingBasketController(
+			IShoppingBasket shoppingBasket)
 		{
-			return new string[] { "value1", "value2" };
+			_shoppingBasket = shoppingBasket;
 		}
 
-		// GET api/<ShoppingBasketController>/5
-		[HttpGet("{id}")]
-		public string Get(int id)
+		// GET: api/<ValuesController>
+		[HttpGet]
+		public IEnumerable<Product> Get(bool withDiscount = false)
 		{
-			return "value";
+			if (withDiscount)
+				_shoppingBasket.ApplyDiscount();
+
+			return _shoppingBasket.Items;
 		}
 
 		// POST api/<ShoppingBasketController>
 		[HttpPost]
-		public void Insert([FromBody] string value)
+		public void Insert(Product product)
 		{
-		}
-
-		// PUT api/<ShoppingBasketController>/5
-		[HttpPut("{id}")]
-		public void Update(int id, [FromBody] string value)
-		{
+			_shoppingBasket.AddItem(product);
 		}
 
 		// DELETE api/<ShoppingBasketController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public void Delete(Guid id)
 		{
+			_shoppingBasket.RemoveItem(id);
 		}
 	}
 }

@@ -27,3 +27,6 @@ C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\obj\Debug\
 C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\obj\Debug\net5.0\ref\ShoppingBasket.Api.dll
 C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\obj\Debug\net5.0\ShoppingBasket.Api.pdb
 C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\obj\Debug\net5.0\ShoppingBasket.Api.genruntimeconfig.cache
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\bin\Debug\net5.0\ShoppingBasket.Core.dll
+C:\Users\apavelic\Documents\Private\ShoppingBasket\ShoppingBasket.Api\bin\Debug\net5.0\ShoppingBasket.Core.pdb

@@ -20,7 +20,11 @@ namespace ShoppingBasket.Core
 		public ShoppingBasket(IDiscountService discountService, IShoppingBasketLogger logger, IEnumerable<Discount> discounts = null)
 		{
 			_discountService = discountService;
-			_discounts = discounts ?? _discountService.GetDiscounts();
+
+			_discounts = discounts == null || !discounts.Any()
+				? discounts = _discountService.GetDiscounts()
+				: discounts;
+
 			_logger = logger;
 			_items = new List<Product>();
 		}
@@ -56,7 +60,9 @@ namespace ShoppingBasket.Core
 		{
 			try
 			{
+				
 				var productTypes = _items
+						.Where(x => !x.IsDiscountApplied)
 						.GroupBy(p => p.Type)
 						.ToDictionary(x => x.Key, x => x.Count());
 
@@ -77,14 +83,14 @@ namespace ShoppingBasket.Core
 
 					if (hasDiscount)
 					{
-						var targets = _items.Where(x => x.Type == discount.Target && !x.IsDiscountApplied).Take(numberOfProductsOnDiscount).ToList();
+						var targets = _items.Where(x => discount.Requirements.Any(r => x.Type == r.Type) && !x.IsDiscountApplied).ToList();
 
 						targets.ForEach(target =>
 						{
-							target.Price = target.Price * (1 - discount.DiscountPercentage / 100m);
+							if (target.Type == discount.Target && numberOfProductsOnDiscount-- > 0)
+								target.Price = target.Price * (1 - discount.DiscountPercentage / 100m);
+							
 							target.IsDiscountApplied = true;
-
-
 							_logger.Log($"Discount applied: {target.ToString()}");
 						});
 					}
