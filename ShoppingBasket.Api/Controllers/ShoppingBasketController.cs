@@ -11,11 +11,14 @@ namespace ShoppingBasket.Api.Controllers
 	public class ShoppingBasketController : ControllerBase
 	{
 		private IShoppingBasket _shoppingBasket;
+		private IDiscountService _discountService;
 
 		public ShoppingBasketController(
-			IShoppingBasket shoppingBasket)
+			IShoppingBasket shoppingBasket,
+			IDiscountService discountService)
 		{
 			_shoppingBasket = shoppingBasket;
+			_discountService = discountService;
 		}
 
 		// GET: api/<ValuesController>
@@ -23,7 +26,7 @@ namespace ShoppingBasket.Api.Controllers
 		public IEnumerable<Product> Get(bool withDiscount = false)
 		{
 			if (withDiscount)
-				_shoppingBasket.ApplyDiscount();
+				_discountService.ApplyDiscounts(_shoppingBasket.Items);
 
 			return _shoppingBasket.Items;
 		}

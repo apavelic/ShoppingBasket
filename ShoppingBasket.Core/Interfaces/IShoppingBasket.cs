@@ -9,6 +9,5 @@ namespace ShoppingBasket.Core.Interfaces
 		List<Product> Items { get; }
 		void AddItem(Product product);
 		void RemoveItem(Guid id);
-		void ApplyDiscount();
 	}
 }

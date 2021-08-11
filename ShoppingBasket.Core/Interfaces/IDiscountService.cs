@@ -5,6 +5,6 @@ namespace ShoppingBasket.Core.Interfaces
 {
 	public interface IDiscountService
 	{
-		IEnumerable<Discount> GetDiscounts();
+		void ApplyDiscounts(IEnumerable<Product> products);
 	}
 }

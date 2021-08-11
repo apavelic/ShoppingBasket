@@ -22,7 +22,7 @@ namespace ShoppingBasket.Core.Tests
 		public void ShoppingBasket_Add()
 		{
 			// Arrange
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger);
+			var shoppingBasket = new ShoppingBasket(_logger);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Bread);
@@ -36,7 +36,7 @@ namespace ShoppingBasket.Core.Tests
 		public void ShoppingBasket_Remove()
 		{
 			// Arrange
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger);
+			var shoppingBasket = new ShoppingBasket(_logger);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Bread);

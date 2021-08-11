@@ -10,12 +10,10 @@ namespace ShoppingBasket.Core.Tests
 	public class ShoppingBasketScenarioTests
 	{
 		private IShoppingBasketLogger _logger;
-		private IDiscountService _discountService;
 
 		public ShoppingBasketScenarioTests()
 		{
 			_logger = new ShoppingBasketLogger();
-			_discountService = new DiscountService(_logger);
 		}
 
 		[Fact]
@@ -28,13 +26,14 @@ namespace ShoppingBasket.Core.Tests
 				DiscountBuilder.FourMilksDiscount
 			};
 
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger, discounts);
+			var shoppingBasket = new ShoppingBasket(_logger);
+			var discountService = new DiscountService(_logger, discounts);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Bread);
 			shoppingBasket.AddItem(ProductBuilder.Butter);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
-			shoppingBasket.ApplyDiscount();
+			discountService.ApplyDiscounts(shoppingBasket.Items);
 
 			// Assert
 			Assert.Equal(2.95m, shoppingBasket.TotalPrice);
@@ -50,14 +49,15 @@ namespace ShoppingBasket.Core.Tests
 				DiscountBuilder.FourMilksDiscount
 			};
 
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger, discounts);
+			var shoppingBasket = new ShoppingBasket(_logger);
+			var discountService = new DiscountService(_logger, discounts);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Butter);
 			shoppingBasket.AddItem(ProductBuilder.Butter);
 			shoppingBasket.AddItem(ProductBuilder.Bread);
 			shoppingBasket.AddItem(ProductBuilder.Bread);
-			shoppingBasket.ApplyDiscount();
+			discountService.ApplyDiscounts(shoppingBasket.Items);
 
 			// Assert
 			Assert.Equal(3.10m, shoppingBasket.TotalPrice);
@@ -73,14 +73,15 @@ namespace ShoppingBasket.Core.Tests
 				DiscountBuilder.FourMilksDiscount
 			};
 
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger, discounts);
+			var shoppingBasket = new ShoppingBasket(_logger);
+			var discountService = new DiscountService(_logger, discounts);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
-			shoppingBasket.ApplyDiscount();
+			discountService.ApplyDiscounts(shoppingBasket.Items);
 
 			// Assert
 			Assert.Equal(3.45m, shoppingBasket.TotalPrice);
@@ -96,7 +97,8 @@ namespace ShoppingBasket.Core.Tests
 				DiscountBuilder.FourMilksDiscount
 			};
 
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger, discounts);
+			var shoppingBasket = new ShoppingBasket(_logger);
+			var discountService = new DiscountService(_logger, discounts);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Milk);
@@ -109,14 +111,14 @@ namespace ShoppingBasket.Core.Tests
 			shoppingBasket.AddItem(ProductBuilder.Bread);
 			shoppingBasket.AddItem(ProductBuilder.Butter);
 			shoppingBasket.AddItem(ProductBuilder.Butter);
-			shoppingBasket.ApplyDiscount();
+			discountService.ApplyDiscounts(shoppingBasket.Items);
 
 			// Assert
 			Assert.Equal(9.00m, shoppingBasket.TotalPrice);
 		}
 
 		[Fact]
-		public void Scenario_FourMilksTwoBreadsTest()
+		public void Scenario_SixMilksTwoBreadsTest()
 		{
 			// Arrange
 			var discounts = new List<Discount>
@@ -125,19 +127,22 @@ namespace ShoppingBasket.Core.Tests
 				DiscountBuilder.FourMilksDiscount
 			};
 
-			var shoppingBasket = new ShoppingBasket(_discountService, _logger, discounts);
+			var shoppingBasket = new ShoppingBasket(_logger);
+			var discountService = new DiscountService(_logger, discounts);
 
 			// Act
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Milk);
+			shoppingBasket.AddItem(ProductBuilder.Milk);
+			shoppingBasket.AddItem(ProductBuilder.Milk);
 			shoppingBasket.AddItem(ProductBuilder.Bread);
 			shoppingBasket.AddItem(ProductBuilder.Bread);
-			shoppingBasket.ApplyDiscount();
+			discountService.ApplyDiscounts(shoppingBasket.Items);
 
 			// Assert
-			Assert.Equal(3.85m, shoppingBasket.TotalPrice);
+			Assert.Equal(6.95m, shoppingBasket.TotalPrice);
 		}
 	}
 }
