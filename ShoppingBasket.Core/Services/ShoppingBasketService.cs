@@ -1,5 +1,4 @@
-﻿using ShoppingBasket.Core.Enumerations;
-using ShoppingBasket.Core.Interfaces;
+﻿using ShoppingBasket.Core.Interfaces;
 using ShoppingBasket.Models.Core;
 using System;
 using System.Collections.Generic;
@@ -12,50 +11,60 @@ namespace ShoppingBasket.Services.Core
 		private IDiscountService _discountService;
 		private readonly IEnumerable<Discount> _discounts;
 
-		public List<Product> Products { get; set; }
+		private List<Product> _basket { get; set; }
 
-		public ShoppingBasketService(IDiscountService discountService)
+		public void Add(Product product)
 		{
-			_discountService = discountService;
-			_discounts = _discountService.GetDiscounts();
-
-			Products = new List<Product>
-			{
-				new Product { Id = Guid.NewGuid(), Name = "P1", IsDiscountApplied = false, Price = 10, Type = ProductType.Milk  },
-				new Product { Id = Guid.NewGuid(), Name = "P2", IsDiscountApplied = false, Price = 10, Type = ProductType.Milk  },
-				new Product { Id = Guid.NewGuid(), Name = "P4", IsDiscountApplied = false, Price = 10, Type = ProductType.Milk  },
-				new Product { Id = Guid.NewGuid(), Name = "P5", IsDiscountApplied = false, Price = 10, Type = ProductType.Milk  },
-				new Product { Id = Guid.NewGuid(), Name = "P6", IsDiscountApplied = false, Price = 7, Type = ProductType.Butter },
-				new Product { Id = Guid.NewGuid(), Name = "P7", IsDiscountApplied = false, Price = 8, Type = ProductType.Bread  }
-			};
+			_basket.Add(product);
 		}
 
-		public double GetBasketPriceWithDiscount()
+		public void Remove(Guid id)
 		{
-			var productTypes = Products
+			var product = _basket.FirstOrDefault(x => x.Id == id);
+			_basket.Remove(product);
+		}
+
+		public ShoppingBasketService(IDiscountService discountService, IEnumerable<Discount> discounts = null)
+		{
+			_discountService = discountService;
+			_discounts = discounts ?? _discountService.GetDiscounts();
+			_basket = new List<Product>();
+		}
+
+		public decimal GetBasketPriceWithDiscount()
+		{
+			var productTypes = _basket
 				.GroupBy(p => p.Type)
 				.ToDictionary(x => x.Key, x => x.Count());
-
 
 			foreach (var discount in _discounts)
 			{
 				var hasDiscount = true;
-
-				discount.Requirements.ForEach(requirement 
-					=> hasDiscount = productTypes.ContainsKey(requirement.Type) && productTypes[requirement.Type] >= requirement.Quantity);
+				var numberOfProductsOnDiscount = int.MaxValue;
+				discount.Requirements.ForEach(requirement =>
+				{
+					if (!productTypes.ContainsKey(requirement.Type) || productTypes[requirement.Type] < requirement.Quantity)
+					{
+						hasDiscount = false;
+						return;
+					}
+					var possibleTargetsForRequirement = productTypes[requirement.Type] / requirement.Quantity;
+					numberOfProductsOnDiscount = possibleTargetsForRequirement < numberOfProductsOnDiscount ? possibleTargetsForRequirement : numberOfProductsOnDiscount;
+				});
 
 				if (hasDiscount)
 				{
-					var target = Products.FirstOrDefault(x => x.Type == discount.Target && !x.IsDiscountApplied);
-					if (target != null)
+					var targets = _basket.Where(x => x.Type == discount.Target && !x.IsDiscountApplied).Take(numberOfProductsOnDiscount).ToList();
+
+					targets.ForEach(target =>
 					{
-						target.Price = target.Price * (1 - discount.DiscountPercentage / 100.0);
+						target.Price = target.Price * (1 - discount.DiscountPercentage / 100m);
 						target.IsDiscountApplied = true;
-					}
+					});
 				}
 			}
 
-			return Products.Sum(x => x.Price);
+			return _basket.Sum(x => x.Price);
 		}
 	}
 }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingBasket.Models.Core;
+using System;
 
 namespace ShoppingBasket.Core.Interfaces
 {
 	public interface IShoppingBasketService
 	{
-		double GetBasketPriceWithDiscount();
+		void Add(Product product);
+		void Remove(Guid id);
+		decimal GetBasketPriceWithDiscount();
 	}
 }
